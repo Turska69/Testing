@@ -1,0 +1,101 @@
+
+#******************** Settings ************************
+
+*** Settings ***
+
+# TODO: Write Documentation e.g. User Registration Test scenario with verification, valid and invalid credentials.
+
+Documentation	Testing the sign up functionality. Sign up test scenario valid information and with invalid email address, used username, without reCAPTCHA and empty password.
+
+# TODO: Write Precondition, Postcondition, Tags
+
+Pre Condition	Open Browser
+Post Condition	Close all browsers
+Tags	Sign-up, Subscribing, Registering
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+# NOTE: Please Remove your login credential before uploading Assignments
+
+# TODO: Write Registration field variables
+
+LoginUrl = https://gitlab.com/users/sign_up
+FirstName= Turo
+LastName= Heino
+UserName= TuroHeino
+Email= turo.heino@student.laurea.fi
+Password= ************
+Used_UserName= Turskaheino666
+Empty=
+Invalid_Email= wDFLSUHwelsdfuhs
+Checked= True
+UnChecked= False
+
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+# TODO: Write Positive and Negative Test Cases and Test Process steps
+
+# Positive Test
+
+Register user with valid username and password 
+	Navigate to Sign-up page https://gitlab.com/users/sign_up
+	Input First name 	FirstName
+	Input Last name		LastName
+	Input Username		UserName
+	Input Email		Email
+	Input Password		************
+	Check reCAPTCHA		Checked
+	Press Register
+	Verify Page should contain Almost there...
+ 
+# Negative Test
+
+Register user with a username already in use
+ 	Navigate to Sign-up page https://gitlab.com/users/sign_up
+	Input First name 	FirstName
+	Input Last name		LastName
+	Input Username		Used_UserName
+	Input Email		Email
+	Input Password		************
+	Check reCAPTCHA		Checked
+	Press Register
+	Verify Page should contain Username is already taken
+
+Register user with empty password
+ 	Navigate to Sign-up page https://gitlab.com/users/sign_up
+	Input First name 	FirstName
+	Input Last name		LastName
+	Input Username		UserName
+	Input Email		Email
+	Input Password		Empty
+	Check reCAPTCHA		Checked
+	Press Register
+	Verify Page should contain Minimum length is 8 characters
+
+Register user with an invalid email address
+ 	Navigate to Sign-up page https://gitlab.com/users/sign_up
+	Input First name 	FirstName
+	Input Last name		LastName
+	Input Username		UserName
+	Input Email		Invalid_Email
+	Input Password		************
+	Check reCAPTCHA		Checked
+	Press Register
+	Verify Page should contain Please provide a valid email address
+
+Register user without checking reCAPTCHA
+ 	Navigate to Sign-up page https://gitlab.com/users/sign_up
+	Input First name 	FirstName
+	Input Last name		LastName
+	Input Username		UserName
+	Input Email		Email
+	Input Password		************
+	Check reCAPTCHA		UnChecked
+	Press Register
+	Verify Page should contain There was an error with the reCAPTCHA. Please solve the reCAPTCHA again.
+

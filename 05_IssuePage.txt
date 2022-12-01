@@ -1,0 +1,85 @@
+
+#******************** Settings ************************
+
+*** Settings ***
+Documentation	Issue Test scenario. CRUD Operation: Create, Read, Update, Delete
+
+# TODO: Write Precondition and Postcondition, Tags 
+
+Pre Condition	Project 'Testek' created in Gitlab, Open Browser
+Post Condition	Log out, Close All Browsers
+Tags	Issue
+
+#******************* Common Variables ********************
+
+
+*** Variables ***
+
+# NOTE: Please Remove your login credential before uploading Assignments
+
+# TODO: Write Issue creation field variables, Updated name of the issue
+
+LoginUrl= https://gitlab.com/users/sign_in
+UserName= TuroHeino
+PassWord= ************
+NewIssueUrl= https://gitlab.com/testing1184/testek/-/issues/new
+Title= Nasty
+IssueUrl= https://gitlab.com/testing1184/testek/-/issues
+Title_2= Nastier
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+# TODO: Write Positive Test Cases and Test Process steps
+
+# Positive Test
+
+Create issue
+	Navigate to Login Page= LoginUrl
+	Input Username  UserName
+    	Input Password  Password
+    	Submit Login Form
+    	Verify Page Should Contain Welcome page
+	Navigate to New Issue page  NewIssueUrl
+	Input Title  Title
+	Press Create issue
+	Verify Page should contain Issue created just now by
+	
+Update name of issue
+	Navigate to Login Page= LoginUrl
+	Input Username  UserName
+    	Input Password  Password
+    	Submit Login Form
+    	Verify Page Should Contain Welcome page
+	Navigate to Issues page  IssueUrl
+	Select  Title
+	Press Edit title and description
+	Remove  Title
+	Input  Title_2
+	Press Save changes
+	Verify Page should contain changed title from Nasty to Nastier
+
+Create second issue with previous updated name
+	Navigate to Login Page= LoginUrl
+	Input Username  UserName
+    	Input Password  Password
+    	Submit Login Form
+    	Verify Page Should Contain Welcome page
+	Navigate to New Issue page  NewIssueUrl
+	Input Title  Title
+	Press Create issue
+	Verify Page should contain Issue created just now by
+
+Delete first issue
+	Navigate to Login Page= LoginUrl
+	Input Username  UserName
+    	Input Password  Password
+    	Submit Login Form
+    	Verify Page Should Contain Welcome page
+	Navigate to Issues page  IssueUrl
+	Select  Title_2
+	Press three dots menu
+	Select Delete issue
+	Press Delete issue
+	Verify Page should contain The issue was successfully deleted.

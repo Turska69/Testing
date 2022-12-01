@@ -1,0 +1,88 @@
+
+#******************** Settings ************************
+
+*** Settings ***
+
+# TODO: Write Dcocumentation e.g. Project Test scenario. CRUD Operation: Create, Read, Update, Delete
+
+Documentation	Testing project creation, reading, updating and deleting.
+
+# TODO: Write Precondition, Postcondition, Tags
+
+Pre Condition	 Open Browser
+Post Condition	 Signed out, Browser closed
+Tags	Project, CRUD
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+# NOTE: Please Remove your login credential before uploading Assignments
+
+# TODO: Write Project creation field variables
+
+NewBlankProjectURL= https://gitlab.com/projects/new#blank_project
+Project_Nam= Testek
+NewTemplateProjectURL= https://gitlab.com/projects/new#create_from_template
+Temp_Nam= Jast
+New_Nam= Kastr
+LoginUrl = https://gitlab.com/users/sign_in
+UserName= TuroHeino
+PassWord= ************
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+# TODO: Write Positive and Negative Test Cases and Test Process steps
+
+# Positive Test
+
+Create blank project
+	Navigate to Login Page  LoginUrl
+	Input Username  UserName
+    	Input Password  Password
+    	Submit Login Form
+    	Verify Page Should Contain Welcome page
+	Navigate to Create blank project page  NewBlankProjectURL
+	Input  Project name  Project_Nam
+	Press Create project
+	Verify Page should contain Project 'Tested' was successfully created
+
+Create, update and delete template project
+	Navigate to Login Page  LoginUrl
+	Input Username  UserName
+    	Input Password  Password
+    	Submit Login Form
+    	Verify Page Should Contain Welcome page
+	Navigate to Crate from template page NewTemplateProjectURL
+	Press Use template
+	Input  Project name  Temp_Nam
+	Press Create project
+	Verify Page should contain The project was successfully imported
+	Press Settings
+	Select General
+	Remove 	Project name  Temp_Nam
+	Input Project name  New_Nam
+	Press Save changes
+	Verify Page should contain Project 'Kastr' was successfully updated
+	Press Expand next to Advanced
+	Press Delete project
+	Input testing1184/kastr
+	Press Yes, delete project
+	Verify Page should contain will be deleted on
+
+# Negative Test
+
+Create a blank project with the previous same name
+	Navigate to Login Page  LoginUrl
+	Input Username  UserName
+    	Input Password  Password
+    	Submit Login Form
+    	Verify Page Should Contain Welcome page
+	Navigate to Create blank project page  NewBlankProjectURL
+	Input  Project name  Project_Nam
+	Press Create project
+	Verify Page should contain Project namespace name has already been taken
+
+
